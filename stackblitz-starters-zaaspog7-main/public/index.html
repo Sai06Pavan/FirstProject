@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Data</title>
+</head>
+<body>
+  <h1>Home page</h1>
+  <div id="user"></div>
+
+  <button>home</button>
+  <script>
+    fetch('/api/users')
+      .then(res => {
+        if (res.redirected) {
+          window.location = res.url;
+        } else {
+          return res.json();
+        }
+      })
+      .then(data => {
+        if (data) {
+          document.getElementById('user').innerText = JSON.stringify(data, null, 2);
+        }
+      }); 
+   </script>
+</body>
+</html>
